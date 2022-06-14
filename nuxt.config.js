@@ -32,23 +32,31 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   axios: {
-    baseURL: "http://localhost:5000",
+    baseURL: "https://fress-media.herokuapp.com",
   },
+
+
+ 
 
   auth: {
     strategies: {
       local: {
-        endpoints: {
-          login: {
-            url: "/api/users",
-            method: "post",
-            propertyName: "data.content.token",
-          },
-
-          // user: { url: 'me', method: 'get', propertyName: 'data' },
-
-          logout: false,
+        token: {
+          property: "content.token",
+          global: true
+          // required: true,
+          // type: 'Bearer'
         },
+        user: {
+          property: "user"
+          // autoFetch: true
+        },
+       
+        endpoints: {
+          login: { url: "users/authenticate", method: "post" },
+          user:{ url: "users", method: "get" },
+           logout: false
+        }
       },
     },
   },
