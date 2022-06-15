@@ -35,29 +35,32 @@ export default {
     baseURL: "https://fress-media.herokuapp.com",
   },
 
-
- 
-
   auth: {
     strategies: {
       local: {
         token: {
-          property: "content.token",
-          global: true
-          // required: true,
-          // type: 'Bearer'
+          property: "token",
+          global: true,
+          required: true,
+          type: "Bearer",
         },
         user: {
-          property: "user"
-          // autoFetch: true
+          property: "user",
+          autoFetch: true,
         },
-       
+
         endpoints: {
           login: { url: "users/authenticate", method: "post" },
-          user:{ url: "users", method: "get" },
-           logout: false
-        }
+          user: { url: "users", method: "get" },
+          logout: false,
+        },
       },
+    },
+    redirect: {
+      login: "/login",
+      logout: "/",
+      callback: "/register",
+      home: "/",
     },
   },
 };
